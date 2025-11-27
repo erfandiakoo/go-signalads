@@ -2,6 +2,9 @@ run:
   timeout: 5m
   tests: true
 
+output:
+  format: colored-line-number
+
 linters:
   enable:
     - errcheck
@@ -18,7 +21,6 @@ linters:
     - unconvert
     - prealloc
     - copyloopvar
-    - shadow
 
 linters-settings:
   errcheck:
@@ -35,6 +37,9 @@ linters-settings:
     severity: medium
   misspell:
     locale: US
+  govet:
+    enable:
+      - shadow
 
 issues:
   exclude-rules:
