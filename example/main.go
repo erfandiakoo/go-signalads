@@ -106,10 +106,11 @@ func main() {
 		log.Printf("Error listing messages: %v\n", err)
 	} else {
 		fmt.Printf("Found %d messages (Total: %d)\n", len(messagesList.Messages), messagesList.Total)
-		for i, msg := range messagesList.Messages {
+		for i := range messagesList.Messages {
 			if i >= 5 {
 				break
 			}
+			msg := &messagesList.Messages[i]
 			fmt.Printf("  - ID: %s, To: %s, Status: %s\n", msg.ID, msg.To, msg.Status)
 		}
 	}

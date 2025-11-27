@@ -27,6 +27,7 @@ func (e *APIError) Error() string {
 }
 
 const (
+	//nolint:gosec // This is an error code constant, not a credential
 	ErrCodeInvalidCredentials  = "INVALID_CREDENTIALS"
 	ErrCodeInvalidPhoneNumber  = "INVALID_PHONE_NUMBER"
 	ErrCodeInvalidMessage      = "INVALID_MESSAGE"

@@ -16,24 +16,20 @@ const (
 	DefaultTimeout = 30 * time.Second
 )
 
-// ClientOption is a function type for configuring a Client.
 type ClientOption func(*Client)
 
-// WithBaseURL sets a custom base URL for the API client.
 func WithBaseURL(baseURL string) ClientOption {
 	return func(c *Client) {
 		c.baseURL = baseURL
 	}
 }
 
-// WithHTTPClient sets a custom HTTP client for the API client.
 func WithHTTPClient(httpClient *http.Client) ClientOption {
 	return func(c *Client) {
 		c.httpClient = httpClient
 	}
 }
 
-// WithTimeout sets a custom timeout for API requests.
 func WithTimeout(timeout time.Duration) ClientOption {
 	return func(c *Client) {
 		if c.httpClient != nil {
@@ -94,7 +90,7 @@ func (c *Client) parseResponse(resp *http.Response, v interface{}) error {
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
 		var apiErr APIError
-		if err := json.Unmarshal(body, &apiErr); err == nil {
+		if unmarshalErr := json.Unmarshal(body, &apiErr); unmarshalErr == nil {
 			if apiErr.StatusCode == 0 {
 				apiErr.StatusCode = resp.StatusCode
 			}
@@ -110,8 +106,8 @@ func (c *Client) parseResponse(resp *http.Response, v interface{}) error {
 	}
 
 	if v != nil {
-		if err := json.Unmarshal(body, v); err != nil {
-			return fmt.Errorf("failed to unmarshal response: %w", err)
+		if unmarshalErr := json.Unmarshal(body, v); unmarshalErr != nil {
+			return fmt.Errorf("failed to unmarshal response: %w", unmarshalErr)
 		}
 	}
 
@@ -151,7 +147,7 @@ func (c *Client) Get(ctx context.Context, endpoint string, result interface{}, q
 }
 
 // Post performs a POST request to the specified endpoint.
-func (c *Client) Post(ctx context.Context, endpoint string, body interface{}, result interface{}) error {
+func (c *Client) Post(ctx context.Context, endpoint string, body, result interface{}) error {
 	resp, err := c.doRequest(ctx, http.MethodPost, endpoint, body, nil)
 	if err != nil {
 		return err
@@ -160,7 +156,7 @@ func (c *Client) Post(ctx context.Context, endpoint string, body interface{}, re
 }
 
 // Put performs a PUT request to the specified endpoint.
-func (c *Client) Put(ctx context.Context, endpoint string, body interface{}, result interface{}) error {
+func (c *Client) Put(ctx context.Context, endpoint string, body, result interface{}) error {
 	resp, err := c.doRequest(ctx, http.MethodPut, endpoint, body, nil)
 	if err != nil {
 		return err

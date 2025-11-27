@@ -71,5 +71,8 @@ jobs:
       run: go build ./...
 
     - name: Build examples
-      run: go build ./example/...
+      run: |
+        cd example
+        go build -o example main.go
+        rm -f example
 

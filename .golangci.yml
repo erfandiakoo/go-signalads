@@ -17,7 +17,8 @@ linters:
     - gosec
     - unconvert
     - prealloc
-    - exportloopref
+    - copyloopvar
+    - shadow
 
 linters-settings:
   errcheck:
@@ -32,8 +33,6 @@ linters-settings:
       - style
   gosec:
     severity: medium
-  govet:
-    check-shadowing: true
   misspell:
     locale: US
 
@@ -45,4 +44,3 @@ issues:
         - gosec
   max-issues-per-linter: 0
   max-same-issues: 0
-
