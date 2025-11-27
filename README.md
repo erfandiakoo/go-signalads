@@ -1,5 +1,6 @@
 # Go SignalAds Client
 
+[![CI](https://github.com/erfandiakoo/go-signalads/actions/workflows/ci.yml/badge.svg)](https://github.com/erfandiakoo/go-signalads/actions/workflows/ci.yml)
 [![Go Reference](https://pkg.go.dev/badge/github.com/erfandiakoo/go-signalads.svg)](https://pkg.go.dev/github.com/erfandiakoo/go-signalads)
 [![Go Report Card](https://goreportcard.com/badge/github.com/erfandiakoo/go-signalads)](https://goreportcard.com/report/github.com/erfandiakoo/go-signalads)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
