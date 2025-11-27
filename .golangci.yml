@@ -3,7 +3,9 @@ run:
   tests: true
 
 output:
-  format: colored-line-number
+  formats:
+    - format: colored-line-number
+    - format: github-actions
 
 linters:
   enable:

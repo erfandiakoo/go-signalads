@@ -118,9 +118,9 @@ func main() {
 	// Example 7: Get message status
 	if msgResponse != nil && msgResponse.ID != "" {
 		fmt.Println("\n=== Get Message Status ===")
-		status, err := client.Messages.GetMessageStatus(ctx, msgResponse.ID)
-		if err != nil {
-			log.Printf("Error getting message status: %v\n", err)
+		status, statusErr := client.Messages.GetMessageStatus(ctx, msgResponse.ID)
+		if statusErr != nil {
+			log.Printf("Error getting message status: %v\n", statusErr)
 		} else {
 			fmt.Printf("Message status: %s\n", status.Status)
 			if status.Cost > 0 {
